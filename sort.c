@@ -1,5 +1,18 @@
 #include <stdio.h>
 
+
+/*
+排序方法		平均情况			最好情况		最坏情况		辅助空间			稳定性
+冒泡排序		O(n^2)			O(n)		O(n^2)		O(1)			稳定
+简单选择排序	O(n^2)			O(n^2)		O(n^2)		O(1)			稳定
+直接插入排序	O(n^2)			O(n)		O(n^2)		O(1)			稳定
+希尔排序		O(nlogn)~O(n^2)	O(n^1.3)	O(n^2)		O(1)			不稳定
+堆排序		O(nlogn)		O(nlogn)	O(nlogn)	O(1)			不稳定
+归并排序		O(nlogn)		O(nlogn)	O(nlogn)	O(n)			稳定
+快速排序		O(nlogn)		O(nlogn)	O(n^2)		O(logn)~O(n)	不稳定
+*/
+
+
 #define swap(a,b) {int temp=a; a=b; b=temp;}
 
 
@@ -188,6 +201,8 @@ void qsort(int a[], int left, int right)
 
 /**
  *归并排序
+ *归并排序的时间复杂度是O(N*lgN)
+ *归并排序的形式就是一棵二叉树，它需要遍历的次数就是二叉树的深度，而根据完全二叉树的可以得出它的时间复杂度是O(N*lgN)。
 **/
 void merge(int a[], int start, int mid, int end)
 {
