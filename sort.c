@@ -185,6 +185,59 @@ void qsort(int a[], int left, int right)
 		qsort(a, index+1, right);
 }
 
+
+/**
+ *归并排序
+**/
+void merge(int a[], int start, int mid, int end)
+{
+	int *tmp = (int *)malloc(sizeof(int)*(end-start+1));
+	if( tmp == NULL )
+	{
+		printf("malloc fail\n");
+		return ;
+	}
+	int i = start, j = mid+1, k = 0;
+
+	while(i <= mid && j <= end)
+	{
+		if (a[i] <= a[j])
+		{
+			tmp[k++] = a[i++];
+		}
+		else
+		{
+			tmp[k++] = a[j++];
+		}
+	}
+
+	while( i <= mid )
+		tmp[k++] = a[i++];
+	while( j <= end )
+		tmp[k++] = a[j++];
+
+	for (i = 0; i < k; ++i)
+	{
+		a[start+i] = tmp[i];
+	}
+
+	free(tmp);
+}
+
+void merge_sort_up2down(int a[], int start, int end)
+{
+	if(a == NULL || start >= end)
+		return ;
+
+	int mid = (start+end)/2;
+
+	merge_sort_up2down(a, start, mid);
+	merge_sort_up2down(a, mid+1, end);
+
+	merge(a, start, mid, end);
+}
+
+
 int main()
 {
 	int i;
@@ -200,7 +253,8 @@ int main()
 	//insertion_sort(array, sizeof(array)/sizeof(int));
 	//selection_sort(array, sizeof(array)/sizeof(int));
 	//double_selection_sort(array, sizeof(array)/sizeof(int));
-	quick_sort(array, 0, 9);
+	//quick_sort(array, 0, sizeof(array)/sizeof(int)-1);
+	merge_sort_up2down(array, 0, 9);
 	printf("sorted array:\n");
 	for (i = 0; i < sizeof(array)/sizeof(int); ++i)
 	{
